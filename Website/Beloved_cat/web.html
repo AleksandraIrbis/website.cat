@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/style.css">   
+    <title>Приветствие</title>
+    <style>
+        .container {
+            margin-top: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Хто ты?</h1>
+        <input type="text" id="nameInput" placeholder="Введите ваше имя">
+        <button onclick="showName()">Нажми сюда</button>
+        <p id="nameOutput"></p>
+    </div>
+    <div class="container">
+
+        <button onclick="showGreeting()">Сюда тоже тыкни</button>
+        <p id="greetingOutput"></p>
+    </div>
+
+    <script>
+        function showName() {
+            var name = document.getElementById("nameInput").value;
+            document.getElementById("nameOutput").innerHTML = "Привет, " + name + "!";
+        }
+    </script>
+     <script>
+        function showGreeting() {
+            var age = prompt("Введите ваш возраст для определения степени опасности посещения сайта:");
+            var greeting;
+
+            switch (true) {
+                case (age < 18):
+                    greeting = "Осторожно, может случиться перердозировка милотой!";
+                    break;
+                case (age >= 18 && age <= 60):
+                    greeting = "Организм выдержит";
+                    break;
+                case (age > 60):
+                    greeting = "Рекомендуется к просмотру для продления жизни";
+                    break;
+                default:
+                    greeting = "Ну хз, попробуй на свой страх и риск";
+            }
+
+            document.getElementById("greetingOutput").innerHTML = greeting;
+        }
+    </script>
+    <section class="wrapper1">
+        <h1>Этот сайт посвящен моему коту</h1>
+        <div class="box">
+            <h1 class="title" >И это будет большой сайт</h1>
+            <h2 class="titleDesc"> Его зовут Лютик</h2>
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/British_shorthair_with_calico_coat_%281%29.jpg/1200px-British_shorthair_with_calico_coat_%281%29.jpg" width="450" height="300">
+    </section>
+    <section><h2>Многие думают, что трехцветные коты выглядят как на картинке выше, однако это не так </h2></section>
+    <section class="wrapper2">
+        <h2>мой кот выглядит вот так:</h2>
+        <img src="https://i.imgur.com/XfNLfop.jpg" width="450" height="300">
+    </section>
+    <section>
+        <p >Вообще, трехцвентые коты это редкость, так как цвет шерсти кошки зависит от гена в ее Х хромосоме, а у самок их две, то она может нести в своем ген. наборе как черный(и все оттенки), так и красный(и все оттенки) и быть соответственно трехцветной при наличии гена, удаляющего цвет(белый). <p>
+        <p > Коты же могут быть либо красной либо черной окраски с добавлением белых пятен(полностью белый кот просто с одним огромным белым пятном))). В связи с чем трехцветная окраска у котов- признак генетической аномалии <p>
+        <h2> Скорее всего необычная окраска моего кота связана с наличием третьей хромосомы в последней паре хромосом, что одновременно делает его трехцвентым, бесплодным и , кажется, самым разговорчивым котом на свете))))</h2>
+    </section>
+    <div id="carousel" class="carousel">
+        <button class="arrow prev">⇦</button>
+        <div class="gallery">
+          <ul>
+            <li> <img src="https://i.imgur.com/KFKwmTo.jpg" width="450" height="300"></li>
+            <li><img src="https://i.imgur.com/7cLg6p7.jpg" width="450" height="300"></li>
+            <li><img src="https://i.imgur.com/Y7vAXyU.jpg" width="450" height="300"></li>
+            <li><img src="https://i.imgur.com/7cLg6p7.jpg" width="450" height="300"></li>
+            <li><img src="https://i.imgur.com/RypY6yX.jpg" width="450" height="300"></li>
+            <li><img src="https://i.imgur.com/nasdgbc.jpg" width="450" height="300"></li>
+            <li><img src="https://i.imgur.com/gjVdpGO.jpg" width="450" height="300"></li>
+            <li><img src="https://i.imgur.com/m8Ek323.jpg" width="450" height="300"></li>
+          </ul>
+        </div>
+        <button class="arrow next">⇨</button>
+    </div>
+    
+      <script>
+        /* этот код помечает картинки, для удобства разработки */
+        let i = 1;
+        for(let li of carousel.querySelectorAll('li')) {
+          li.style.position = 'relative';
+          li.insertAdjacentHTML('beforeend', `<span style="position:absolute;left:0;top:0">${i}</span>`);
+          i++;
+        }
+    
+        /* конфигурация */
+        let width = 130; // ширина картинки
+        let count = 3; // видимое количество изображений
+    
+        let list = carousel.querySelector('ul');
+        let listElems = carousel.querySelectorAll('li');
+    
+        let position = 0; // положение ленты прокрутки
+    
+        carousel.querySelector('.prev').onclick = function() {
+          // сдвиг влево
+          position += width * count;
+          // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
+          position = Math.min(position, 0)
+          list.style.marginLeft = position + 'px';
+        };
+    
+        carousel.querySelector('.next').onclick = function() {
+          // сдвиг вправо
+          position -= width * count;
+          // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
+          position = Math.max(position, -width * (listElems.length - count));
+          list.style.marginLeft = position + 'px';
+        };
+    </script>
+    
+</body>
+</html>
